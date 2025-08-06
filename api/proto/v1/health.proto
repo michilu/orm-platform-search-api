@@ -1,0 +1,51 @@
+// The canonical version of this proto can be found at
+// https://github.com/grpc/grpc-proto/blob/master/grpc/health/v1/health.proto
+
+syntax = "proto3";
+
+package proto.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "api/proto/v1";
+
+service HealthService {
+  rpc Check(CheckRequest) returns (CheckResponse) {
+    option (google.api.http) = {get: "/v1/healthCheck"};
+  }
+}
+
+message CheckRequest {
+  string service = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "The service name as specified.",
+      pattern: "^proto$",
+    },
+    (buf.validate.field).string.const = "proto"
+  ];
+}
+
+message CheckResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "CheckResponse"
+      description: "The response message containing the health status of the service."
+      required: ["status"]
+    }
+  };
+  ServingStatus status = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The serving status of the health check."},
+    (buf.validate.field).enum = {defined_only: true}
+  ];
+}
+
+enum ServingStatus {
+  SERVING_STATUS_UNKNOWN_UNSPECIFIED = 0;
+  SERVING_STATUS_SERVING = 1;
+  SERVING_STATUS_NOT_SERVING = 2;
+}

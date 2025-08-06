@@ -1,0 +1,10 @@
+version: v1
+managed:
+  enabled: true
+plugins:
+  - plugin: buf.build/grpc-ecosystem/openapiv2
+    out: api
+    opt:
+      - allow_merge=true
+      - disable_default_errors=true
+      - merge_file_name=apidocs.json
