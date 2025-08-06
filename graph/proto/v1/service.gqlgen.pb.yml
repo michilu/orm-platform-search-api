@@ -1,0 +1,22 @@
+schema:
+- service.pb.graphqls
+exec:
+  filename: exec.go
+model:
+  filename: models.go
+models:
+  Code:
+    model:
+    - google.golang.org/genproto/googleapis/rpc/code.Code
+  ExampleServiceQueryRequestInput:
+    model:
+    - api/proto/v1.ExampleServiceQueryRequest
+  ExampleServiceQueryResponse:
+    model:
+    - api/proto/v1.ExampleServiceQueryResponse
+  Int32:
+    model:
+    - github.com/danielvladco/go-proto-gql/pb.Int32
+  Status:
+    model:
+    - api/proto/v1.Status

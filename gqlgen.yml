@@ -1,0 +1,30 @@
+exec:
+  filename: exec.go
+model:
+  filename: models.go
+models:
+  CheckRequestInput:
+    model:
+      - api/proto/v1.CheckRequest
+  CheckResponse:
+    model:
+      - api/proto/v1.CheckResponse
+  Code:
+    model:
+      - google.golang.org/genproto/googleapis/rpc/code.Code
+  ExampleServiceQueryRequestInput:
+    model:
+      - api/proto/v1.ExampleServiceQueryRequest
+  ExampleServiceQueryResponse:
+    model:
+      - api/proto/v1.ExampleServiceQueryResponse
+  Int32:
+    model:
+      - github.com/danielvladco/go-proto-gql/pb.Int32
+  ServingStatus:
+    model:
+      - api/proto/v1.ServingStatus
+  Status:
+    model:
+      - api/proto/v1.Status
+schema:
